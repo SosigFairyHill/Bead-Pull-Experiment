@@ -1,0 +1,486 @@
+(* Content-type: application/vnd.wolfram.mathematica *)
+
+(*** Wolfram Notebook File ***)
+(* http://www.wolfram.com/nb *)
+
+(* CreatedBy='Mathematica 9.0' *)
+
+(*CacheID: 234*)
+(* Internal cache information:
+NotebookFileLineBreakTest
+NotebookFileLineBreakTest
+NotebookDataPosition[       157,          7]
+NotebookDataLength[     18623,        477]
+NotebookOptionsPosition[     16913,        413]
+NotebookOutlinePosition[     17277,        429]
+CellTagsIndexPosition[     17234,        426]
+WindowFrame->Normal*)
+
+(* Beginning of Notebook Content *)
+Notebook[{
+Cell[BoxData[{
+ RowBox[{"<<", "SerialIO`"}], "\[IndentingNewLine]", 
+ RowBox[{"<<", "AnritsuVNAScanner`"}]}], "Input",
+ CellChangeTimes->{{3.5854674485548277`*^9, 3.5854674506026506`*^9}, {
+  3.585467532827608*^9, 3.585467533117475*^9}}],
+
+Cell[CellGroupData[{
+
+Cell[BoxData[{
+ RowBox[{
+  RowBox[{"myArduino", " ", "=", " ", 
+   RowBox[{"SerialOpen", "[", "\"\<COM3\>\"", "]"}]}], 
+  ";"}], "\[IndentingNewLine]", 
+ RowBox[{
+  RowBox[{"SerialSetOptions", "[", 
+   RowBox[{"myArduino", ",", 
+    RowBox[{"\"\<BaudRate\>\"", "\[Rule]", "9600"}]}], "]"}], 
+  ";"}], "\[IndentingNewLine]", 
+ RowBox[{"SerialReadyQ", "[", "myArduino", "]"}]}], "Input",
+ CellChangeTimes->{{3.585467455362821*^9, 3.5854675135965147`*^9}, {
+  3.5855494900469303`*^9, 3.585549505342493*^9}, {3.585562604206656*^9, 
+  3.5855626071441936`*^9}, {3.5855629453516474`*^9, 3.585562945554775*^9}}],
+
+Cell[BoxData["False"], "Output",
+ CellChangeTimes->{
+  3.585562620722492*^9, 3.585562823350086*^9, {3.585562897601036*^9, 
+   3.585562914523128*^9}, {3.5855629611018496`*^9, 3.585562983086506*^9}, 
+   3.5855631817921743`*^9, 3.5855632394960375`*^9, 3.5855634963899508`*^9, {
+   3.5855642530090103`*^9, 3.585564263306017*^9}, 3.5855653310071836`*^9, 
+   3.585637123067563*^9, 3.585650712194627*^9, 3.5856559993248014`*^9, 
+   3.5858958796881495`*^9}]
+}, Open  ]],
+
+Cell[BoxData[{
+ RowBox[{
+  RowBox[{"numMeasurements", " ", "=", " ", "151"}], 
+  ";"}], "\[IndentingNewLine]", 
+ RowBox[{
+  RowBox[{"numScans", " ", "=", " ", "21"}], ";"}], "\[IndentingNewLine]", 
+ RowBox[{
+  RowBox[{"j", "=", "1"}], ";"}], "\[IndentingNewLine]", 
+ RowBox[{
+  RowBox[{"currentScan", "=", 
+   RowBox[{"{", "}"}]}], ";"}]}], "Input",
+ CellChangeTimes->{{3.585467603276623*^9, 3.5854676272539997`*^9}, {
+   3.58546807976674*^9, 3.585468087799317*^9}, {3.585549744716167*^9, 
+   3.585549756459867*^9}, {3.5855498303808327`*^9, 3.585549830524509*^9}, {
+   3.5856371130674353`*^9, 3.5856371158955965`*^9}, {3.5856373000542035`*^9, 
+   3.5856373031792436`*^9}, {3.585637379836475*^9, 3.5856373827896376`*^9}, {
+   3.585648984891268*^9, 3.5856490027352457`*^9}, {3.5856506907724776`*^9, 
+   3.5856506910693564`*^9}, 3.5856552686279483`*^9, 3.585657786305526*^9, {
+   3.58607124387179*^9, 3.586071243965541*^9}}],
+
+Cell[CellGroupData[{
+
+Cell[BoxData[
+ RowBox[{"SerialWrite", "[", 
+  RowBox[{"myArduino", ",", "\"\<B\>\""}], "]"}]], "Input",
+ CellChangeTimes->{{3.585562997055434*^9, 3.585563003961773*^9}, {
+  3.5855643312912626`*^9, 3.5855643315256405`*^9}, {3.5855655003687267`*^9, 
+  3.5855655020562477`*^9}}],
+
+Cell[BoxData["\<\"B\"\>"], "Output",
+ CellChangeTimes->{
+  3.5855630055711684`*^9, {3.58556325332434*^9, 3.5855632618556986`*^9}, 
+   3.585563311293832*^9, 3.5855633507787123`*^9, 3.585563499468115*^9, 
+   3.585563709908309*^9, 3.585564109913429*^9, {3.5855642688217125`*^9, 
+   3.5855643358850713`*^9}, {3.5855643826356697`*^9, 3.585564399635887*^9}, 
+   3.585564486871379*^9, 3.5855647980784874`*^9, {3.5855649841902447`*^9, 
+   3.585564991721591*^9}, 3.5855653362103753`*^9, {3.5855654811966057`*^9, 
+   3.5855655024000025`*^9}}]
+}, Open  ]],
+
+Cell[CellGroupData[{
+
+Cell[BoxData[{
+ RowBox[{"SerialWrite", "[", 
+  RowBox[{"myArduino", ",", "\"\<B\>\""}], "]"}], "\[IndentingNewLine]", 
+ RowBox[{"StringTake", "[", 
+  RowBox[{
+   RowBox[{"SerialRead", "[", "myArduino", "]"}], ",", 
+   RowBox[{"-", "1"}]}], "]"}]}], "Input",
+ CellChangeTimes->{{3.5855630272276955`*^9, 3.5855630333371487`*^9}, {
+   3.5855638283004494`*^9, 3.585563828956708*^9}, {3.585564868985645*^9, 
+   3.58556486975128*^9}, {3.5855648997672887`*^9, 3.5855649012048073`*^9}, 
+   3.5855655310253687`*^9}],
+
+Cell[BoxData["\<\"B\"\>"], "Output",
+ CellChangeTimes->{
+  3.5855630336340275`*^9, 3.585563512327655*^9, {3.5855638075033083`*^9, 
+   3.58556384512879*^9}, {3.585564118460413*^9, 3.5855641366481457`*^9}, {
+   3.58556424360264*^9, 3.585564250618355*^9}, {3.5855644140579467`*^9, 
+   3.5855644297300224`*^9}, {3.5855648300320215`*^9, 3.585564901407935*^9}, {
+   3.5855649728619747`*^9, 3.585565021893852*^9}, {3.585565058597447*^9, 
+   3.5855650978010736`*^9}, {3.585565134301541*^9, 3.585565182755286*^9}, {
+   3.5855652402247715`*^9, 3.5855652532718134`*^9}, 3.5855654348522625`*^9, {
+   3.5855655322441344`*^9, 3.585565584182299*^9}}],
+
+Cell[BoxData["\<\"H\"\>"], "Output",
+ CellChangeTimes->{
+  3.5855630336340275`*^9, 3.585563512327655*^9, {3.5855638075033083`*^9, 
+   3.58556384512879*^9}, {3.585564118460413*^9, 3.5855641366481457`*^9}, {
+   3.58556424360264*^9, 3.585564250618355*^9}, {3.5855644140579467`*^9, 
+   3.5855644297300224`*^9}, {3.5855648300320215`*^9, 3.585564901407935*^9}, {
+   3.5855649728619747`*^9, 3.585565021893852*^9}, {3.585565058597447*^9, 
+   3.5855650978010736`*^9}, {3.585565134301541*^9, 3.585565182755286*^9}, {
+   3.5855652402247715`*^9, 3.5855652532718134`*^9}, 3.5855654348522625`*^9, {
+   3.5855655322441344`*^9, 3.585565584182299*^9}}]
+}, Open  ]],
+
+Cell[CellGroupData[{
+
+Cell[BoxData[
+ RowBox[{"ImportString", "[", "\"\<H\>\"", "]"}]], "Input",
+ NumberMarks->False],
+
+Cell[BoxData[
+ RowBox[{"{", 
+  RowBox[{
+   RowBox[{"\<\"EdgeRules\"\>", "\[Rule]", 
+    RowBox[{"{", 
+     RowBox[{"{", "}"}], "}"}]}], ",", 
+   RowBox[{"\<\"EdgeTypes\"\>", "\[Rule]", 
+    RowBox[{"{", 
+     RowBox[{"{", "}"}], "}"}]}], ",", 
+   RowBox[{"\<\"FormalCharges\"\>", "\[Rule]", 
+    RowBox[{"{", 
+     RowBox[{"{", "0", "}"}], "}"}]}], ",", 
+   RowBox[{"\<\"VertexTypes\"\>", "\[Rule]", 
+    RowBox[{"{", 
+     RowBox[{"{", "\<\"H\"\>", "}"}], "}"}]}]}], "}"}]], "Output",
+ CellChangeTimes->{3.5855655486818447`*^9}]
+}, Open  ]],
+
+Cell[CellGroupData[{
+
+Cell[BoxData[
+ RowBox[{"StringTake", "[", 
+  RowBox[{
+   RowBox[{"SerialRead", "[", "myArduino", "]"}], ",", 
+   RowBox[{"-", "1"}]}], "]"}]], "Input",
+ CellChangeTimes->{{3.585564832516428*^9, 3.5855648399540234`*^9}, {
+  3.5855653478980246`*^9, 3.5855653489605384`*^9}, {3.585565451868106*^9, 
+  3.585565506915685*^9}, {3.585565570775878*^9, 3.5855655781822224`*^9}}],
+
+Cell[BoxData["\<\"H\"\>"], "Output",
+ CellChangeTimes->{{3.585564840188401*^9, 3.585564863219946*^9}, {
+  3.5855652578812475`*^9, 3.5855652759127283`*^9}, {3.585565346194878*^9, 
+  3.585565384007862*^9}, {3.5855654474930496`*^9, 3.585565525634675*^9}, {
+  3.58556555807259*^9, 3.5855655941980524`*^9}}]
+}, Open  ]],
+
+Cell[BoxData["."], "Input",
+ CellChangeTimes->{3.585565570822753*^9}],
+
+Cell[CellGroupData[{
+
+Cell[BoxData[
+ RowBox[{"StringToStream", "[", "\"\<H\>\"", "]"}]], "Input",
+ NumberMarks->False],
+
+Cell[BoxData[
+ RowBox[{"InputStream", "[", 
+  RowBox[{"String", ",", "117"}], "]"}]], "Output",
+ CellChangeTimes->{3.5855655157751737`*^9}]
+}, Open  ]],
+
+Cell[BoxData[
+ RowBox[{
+  RowBox[{"While", "[", "\[IndentingNewLine]", 
+   RowBox[{
+    RowBox[{"j", "<", "numMeasurements"}], ",", "\[IndentingNewLine]", 
+    RowBox[{
+     RowBox[{"startScan", "=", "\"\<L\>\""}], ";", "\[IndentingNewLine]", 
+     RowBox[{"initialTime", "=", 
+      RowBox[{"DateList", "[", "]"}]}], ";", "\[IndentingNewLine]", 
+     RowBox[{"timeElapsed", "=", 
+      RowBox[{
+       RowBox[{"0", "&"}], "/@", 
+       RowBox[{"Range", "[", "6", "]"}]}]}], ";", "\[IndentingNewLine]", 
+     RowBox[{"tSeconds", "=", "0"}], ";", "\[IndentingNewLine]", 
+     RowBox[{"i", "=", "1"}], ";", "\[IndentingNewLine]", 
+     RowBox[{"While", "[", 
+      RowBox[{
+       RowBox[{"i", "<", "numScans"}], ",", "\[IndentingNewLine]", 
+       RowBox[{
+        RowBox[{"timeElapsed", "=", 
+         RowBox[{
+          RowBox[{"DateList", "[", "]"}], "-", "initialTime"}]}], ";", 
+        "\[IndentingNewLine]", 
+        RowBox[{"tSeconds", "=", 
+         RowBox[{
+          RowBox[{
+           RowBox[{
+           "timeElapsed", "\[LeftDoubleBracket]", "3", 
+            "\[RightDoubleBracket]"}], "*", "86400"}], "+", 
+          RowBox[{
+           RowBox[{
+           "timeElapsed", "\[LeftDoubleBracket]", "4", 
+            "\[RightDoubleBracket]"}], "*", "3600"}], "+", 
+          RowBox[{
+           RowBox[{
+           "timeElapsed", "\[LeftDoubleBracket]", "5", 
+            "\[RightDoubleBracket]"}], "*", "60"}], "+", 
+          RowBox[{
+          "timeElapsed", "\[LeftDoubleBracket]", "6", 
+           "\[RightDoubleBracket]"}]}]}], ";", "\[IndentingNewLine]", 
+        RowBox[{"Export", "[", 
+         RowBox[{
+          RowBox[{"StringJoin", "[", 
+           RowBox[{"\"\<D:\\\\Data\\\\2013-8-21\\\\\>\"", ",", 
+            RowBox[{"ToString", "[", "j", "]"}], ",", "\"\<beadPullMag\>\"", 
+            ",", 
+            RowBox[{"ToString", "[", "i", "]"}], ",", "\"\<_\>\"", ",", 
+            RowBox[{"StringReplace", "[", 
+             RowBox[{
+              RowBox[{"ToString", "[", 
+               RowBox[{"Round", "[", "tSeconds", "]"}], "]"}], ",", 
+              RowBox[{"\"\<.\>\"", "\[Rule]", "\"\<_\>\""}]}], "]"}], ",", 
+            "\"\<.mat\>\""}], "]"}], ",", 
+          RowBox[{
+           RowBox[{"vnaScan", "[", 
+            RowBox[{
+            "\"\<Mag\>\"", ",", "0", ",", "1", ",", "801", ",", 
+             "\"\<GPIB0::6::INSTR\>\""}], "]"}], "\[LeftDoubleBracket]", "1", 
+           "\[RightDoubleBracket]"}]}], "]"}], ";", "\[IndentingNewLine]", 
+        RowBox[{"Export", "[", 
+         RowBox[{
+          RowBox[{"StringJoin", "[", 
+           RowBox[{"\"\<D:\\\\Data\\\\2013-8-21\\\\\>\"", ",", 
+            RowBox[{"ToString", "[", "j", "]"}], ",", "\"\<beadPullPha\>\"", 
+            ",", 
+            RowBox[{"ToString", "[", "i", "]"}], ",", "\"\<_\>\"", ",", 
+            RowBox[{"StringReplace", "[", 
+             RowBox[{
+              RowBox[{"ToString", "[", 
+               RowBox[{"Round", "[", "tSeconds", "]"}], "]"}], ",", 
+              RowBox[{"\"\<.\>\"", "\[Rule]", "\"\<_\>\""}]}], "]"}], ",", 
+            "\"\<.mat\>\""}], "]"}], ",", 
+          RowBox[{
+           RowBox[{"vnaScan", "[", 
+            RowBox[{
+            "\"\<Pha\>\"", ",", "0", ",", "1", ",", "801", ",", 
+             "\"\<GPIB0::6::INSTR\>\""}], "]"}], "\[LeftDoubleBracket]", "1", 
+           "\[RightDoubleBracket]"}]}], "]"}], ";", "\[IndentingNewLine]", 
+        RowBox[{"currentScan", "=", 
+         RowBox[{"Join", "[", 
+          RowBox[{"currentScan", ",", 
+           RowBox[{"{", 
+            RowBox[{"{", 
+             RowBox[{"i", ",", "j"}], "}"}], "}"}]}], "]"}]}], ";", 
+        "\[IndentingNewLine]", 
+        RowBox[{"i", "=", 
+         RowBox[{"i", "+", "1"}]}], ";"}]}], "\[IndentingNewLine]", "]"}], 
+     ";", "\[IndentingNewLine]", 
+     RowBox[{"j", "=", 
+      RowBox[{"j", "+", "1"}]}], ";", "\[IndentingNewLine]", 
+     RowBox[{"startScan", "=", "0"}], ";", "\[IndentingNewLine]", 
+     RowBox[{"SerialWrite", "[", 
+      RowBox[{"myArduino", ",", "\"\<A\>\""}], "]"}], ";", 
+     "\[IndentingNewLine]", 
+     RowBox[{"StringTake", "[", 
+      RowBox[{
+       RowBox[{"SerialRead", "[", "myArduino", "]"}], ",", 
+       RowBox[{"-", "1"}]}], "]"}], ";", "\[IndentingNewLine]", 
+     RowBox[{"While", "[", 
+      RowBox[{
+       RowBox[{"startScan", "\[NotEqual]", "\"\<H\>\""}], ",", 
+       RowBox[{
+        RowBox[{"startScan", "=", 
+         RowBox[{"StringTake", "[", 
+          RowBox[{
+           RowBox[{"SerialRead", "[", "myArduino", "]"}], ",", 
+           RowBox[{"-", "1"}]}], "]"}]}], ";"}]}], "]"}]}]}], 
+   "\[IndentingNewLine]", "]"}], ";"}]], "Input",
+ CellChangeTimes->{{3.57477096092082*^9, 3.574771023852976*^9}, {
+   3.5747711020198803`*^9, 3.574771187148456*^9}, {3.574771417994624*^9, 
+   3.574771454164991*^9}, {3.574771502462339*^9, 3.574771526791461*^9}, {
+   3.574771575398267*^9, 3.5747716947271023`*^9}, {3.5747720423380504`*^9, 
+   3.5747720697120748`*^9}, {3.5747725673301754`*^9, 3.57477256814267*^9}, {
+   3.5747726109236465`*^9, 3.5747726530640016`*^9}, {3.5747727209858327`*^9, 
+   3.574772750626458*^9}, {3.5747727856111*^9, 3.574772788361153*^9}, {
+   3.5747728818160725`*^9, 3.57477288481613*^9}, {3.574772977708539*^9, 
+   3.574772994865118*^9}, {3.5747730737259808`*^9, 3.5747731256950636`*^9}, {
+   3.5775970583316183`*^9, 3.5775970740973444`*^9}, {3.5776020577854896`*^9, 
+   3.5776020594261255`*^9}, {3.577602270755603*^9, 3.5776022945213795`*^9}, {
+   3.5776023337247553`*^9, 3.577602339240416*^9}, {3.5777886700122566`*^9, 
+   3.5777886891873217`*^9}, {3.5777953221405325`*^9, 3.577795333624981*^9}, {
+   3.578045755056012*^9, 3.578045766040387*^9}, {3.578148035481083*^9, 
+   3.578148043293583*^9}, {3.578291582409378*^9, 3.578291589346878*^9}, {
+   3.578401010657258*^9, 3.578401018329133*^9}, {3.578829150197966*^9, 
+   3.578829154244841*^9}, {3.578829192494841*^9, 3.578829196635466*^9}, {
+   3.580020200105516*^9, 3.5800202244964533`*^9}, {3.580030102419764*^9, 
+   3.58003010676357*^9}, {3.580116339422493*^9, 3.5801163843761935`*^9}, {
+   3.5801966993887386`*^9, 3.5801967104674306`*^9}, {3.5806271228671885`*^9, 
+   3.580627136648527*^9}, {3.580636456301922*^9, 3.5806364605363245`*^9}, {
+   3.580814679983147*^9, 3.580814689967586*^9}, {3.58261699842517*^9, 
+   3.5826170160221853`*^9}, {3.5854675702409487`*^9, 
+   3.5854675966042757`*^9}, {3.5854676332055817`*^9, 3.585467635179429*^9}, {
+   3.5854678111620007`*^9, 3.585467940319236*^9}, 3.5854680083486547`*^9, {
+   3.585468050635592*^9, 3.585468059519664*^9}, {3.5854680919084063`*^9, 
+   3.5854682616096973`*^9}, {3.585548661273346*^9, 3.585548720716851*^9}, {
+   3.585549404156727*^9, 3.585549405260845*^9}, {3.585549690100037*^9, 
+   3.585549694924151*^9}, {3.5855497588226852`*^9, 3.585549774161406*^9}, {
+   3.585549842430365*^9, 3.585549844084046*^9}, {3.5855627910527973`*^9, 
+   3.5855627990841503`*^9}, {3.5856370611136456`*^9, 3.58563709114528*^9}, 
+   3.5856372893040657`*^9, 3.585637800419983*^9, {3.585649011797862*^9, 
+   3.5856490143135195`*^9}, 3.5856490914551315`*^9, {3.5856506674440536`*^9, 
+   3.5856506802098427`*^9}, {3.5856552825500016`*^9, 3.5856552862844243`*^9}, 
+   3.5856554893338985`*^9, {3.5856561053105326`*^9, 3.5856561058261642`*^9}, {
+   3.585915508489262*^9, 3.585915522676944*^9}, {3.5860712507000027`*^9, 
+   3.586071255262561*^9}}],
+
+Cell[BoxData[
+ RowBox[{"ClearSystemCache", "[", "]"}]], "Input",
+ CellChangeTimes->{{3.585655393442046*^9, 3.585655400801515*^9}}],
+
+Cell[CellGroupData[{
+
+Cell[BoxData[
+ RowBox[{"Dynamic", "[", "currentScan", "]"}]], "Input",
+ CellChangeTimes->{{3.585562680926388*^9, 3.585562688426484*^9}}],
+
+Cell[BoxData[
+ DynamicBox[ToBoxes[$CellContext`currentScan, StandardForm],
+  ImageSizeCache->{857.5, {5424., 12.}}]], "Output",
+ CellChangeTimes->{3.5855626891764936`*^9, 3.585637144349086*^9, 
+  3.5856553833169165`*^9, 3.5856560940291386`*^9, 3.5858958866347513`*^9}]
+}, Open  ]],
+
+Cell[CellGroupData[{
+
+Cell[BoxData[
+ RowBox[{"Dynamic", "[", 
+  RowBox[{"Length", "[", "currentScan", "]"}], "]"}]], "Input",
+ CellChangeTimes->{{3.585637247100401*^9, 3.5856372501941905`*^9}, {
+  3.5856373296639576`*^9, 3.5856373361640406`*^9}}],
+
+Cell[BoxData[
+ DynamicBox[ToBoxes[
+   Length[$CellContext`currentScan], StandardForm],
+  ImageSizeCache->{32., {0., 8.}}]], "Output",
+ CellChangeTimes->{3.585637250412943*^9, 3.5856373364921703`*^9, 
+  3.5856553850825644`*^9, 3.5856560962322917`*^9, 3.5858958876986456`*^9}]
+}, Open  ]],
+
+Cell[CellGroupData[{
+
+Cell[BoxData[
+ RowBox[{"\[Pi]", "*", "12.66"}]], "Input",
+ CellChangeTimes->{{3.585640778020596*^9, 3.5856407810987606`*^9}}],
+
+Cell[BoxData["39.77256299444678`"], "Output",
+ CellChangeTimes->{3.5856407813643885`*^9}]
+}, Open  ]],
+
+Cell[CellGroupData[{
+
+Cell[BoxData[
+ RowBox[{"\[Pi]", " ", 
+  RowBox[{"Rationalize", "[", 
+   FractionBox["39.77256299444678`", "\[Pi]"], "]"}]}]], "Input",
+ NumberMarks->False],
+
+Cell[BoxData[
+ FractionBox[
+  RowBox[{"633", " ", "\[Pi]"}], "50"]], "Output",
+ CellChangeTimes->{3.585641151712879*^9}]
+}, Open  ]],
+
+Cell[CellGroupData[{
+
+Cell[BoxData[
+ RowBox[{"10", "/", 
+  RowBox[{"(", 
+   RowBox[{
+    RowBox[{"(", 
+     RowBox[{"\[Pi]", "*", "12.66"}], ")"}], "/", 
+    RowBox[{"(", 
+     RowBox[{"360", "/", 
+      RowBox[{"(", 
+       RowBox[{"5.625", "/", "64"}], ")"}]}], ")"}]}], ")"}]}]], "Input",
+ CellChangeTimes->{{3.5856410446177588`*^9, 3.585641148556589*^9}, 
+   3.585645312984893*^9}],
+
+Cell[BoxData["1029.8556823134334`"], "Output",
+ CellChangeTimes->{{3.585641047164666*^9, 3.5856410884620695`*^9}, {
+   3.585641119915597*^9, 3.585641148806592*^9}, 3.585645313172395*^9}]
+}, Open  ]],
+
+Cell[BoxData[""], "Input",
+ CellChangeTimes->{{3.585648806029603*^9, 3.585648811076543*^9}}]
+},
+WindowSize->{1019, 668},
+WindowMargins->{{0, Automatic}, {Automatic, 0}},
+ShowSelection->True,
+FrontEndVersion->"9.0 for Microsoft Windows (32-bit) (January 25, 2013)",
+StyleDefinitions->"Default.nb"
+]
+(* End of Notebook Content *)
+
+(* Internal cache information *)
+(*CellTagsOutline
+CellTagsIndex->{}
+*)
+(*CellTagsIndex
+CellTagsIndex->{}
+*)
+(*NotebookFileOutline
+Notebook[{
+Cell[557, 20, 237, 4, 52, "Input"],
+Cell[CellGroupData[{
+Cell[819, 28, 603, 13, 72, "Input"],
+Cell[1425, 43, 449, 7, 31, "Output"]
+}, Open  ]],
+Cell[1889, 53, 921, 18, 92, "Input"],
+Cell[CellGroupData[{
+Cell[2835, 75, 275, 5, 31, "Input"],
+Cell[3113, 82, 532, 8, 31, "Output"]
+}, Open  ]],
+Cell[CellGroupData[{
+Cell[3682, 95, 506, 10, 52, "Input"],
+Cell[4191, 107, 635, 9, 31, "Output"],
+Cell[4829, 118, 635, 9, 31, "Output"]
+}, Open  ]],
+Cell[CellGroupData[{
+Cell[5501, 132, 94, 2, 31, "Input"],
+Cell[5598, 136, 529, 15, 31, "Output"]
+}, Open  ]],
+Cell[CellGroupData[{
+Cell[6164, 156, 369, 7, 31, "Input"],
+Cell[6536, 165, 302, 4, 31, "Output"]
+}, Open  ]],
+Cell[6853, 172, 69, 1, 31, "Input"],
+Cell[CellGroupData[{
+Cell[6947, 177, 96, 2, 31, "Input"],
+Cell[7046, 181, 139, 3, 31, "Output"]
+}, Open  ]],
+Cell[7200, 187, 7341, 144, 512, "Input"],
+Cell[14544, 333, 130, 2, 31, "Input"],
+Cell[CellGroupData[{
+Cell[14699, 339, 136, 2, 31, "Input"],
+Cell[14838, 343, 268, 4, 5452, "Output"]
+}, Open  ]],
+Cell[CellGroupData[{
+Cell[15143, 352, 224, 4, 31, "Input"],
+Cell[15370, 358, 274, 5, 31, "Output"]
+}, Open  ]],
+Cell[CellGroupData[{
+Cell[15681, 368, 125, 2, 31, "Input"],
+Cell[15809, 372, 89, 1, 31, "Output"]
+}, Open  ]],
+Cell[CellGroupData[{
+Cell[15935, 378, 155, 4, 46, "Input"],
+Cell[16093, 384, 120, 3, 46, "Output"]
+}, Open  ]],
+Cell[CellGroupData[{
+Cell[16250, 392, 363, 11, 31, "Input"],
+Cell[16616, 405, 186, 2, 31, "Output"]
+}, Open  ]],
+Cell[16817, 410, 92, 1, 31, "Input"]
+}
+]
+*)
+
+(* End of internal cache information *)
